@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Listings</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Listings</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Job Group</th>
+            <th>Badge</th>
+            <th>Deadline</th>
+            <th>Location</th>
+            <th>Experience</th>
+            <th>Education</th>
+            <th>Employment Type</th>
+            <th>Salary</th>
+            <th>Tech Stack</th>
+            <th>Created At</th>
+            <th>Crawled At</th>
+            <th>URL</th>
+        </tr>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.title }}</td>
+                <td>{{ job.company_name }}</td>
+                <td>{{ job.job_group }}</td>
+                <td>{{ job.badge }}</td>
+                <td>{{ job.deadline }}</td>
+                <td>{{ job.address_main }} ({{ job.address_total }})</td>
+                <td>{{ job.experience }}</td>
+                <td>{{ job.education }}</td>
+                <td>{{ job.employment_type }}</td>
+                <td>{{ job.salary }}</td>
+                <td>{{ job.tech_stack }}</td>
+                <td>{{ job.createdAt }}</td>
+                <td>{{ job.crawledAt }}</td>
+                <td><a href="{{ job.url }}" target="_blank">Link</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

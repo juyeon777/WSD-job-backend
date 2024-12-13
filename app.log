@@ -92,3 +92,136 @@ sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown 
 FROM jobs]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
 2024-12-12 03:17:29,701 [INFO]: 127.0.0.1 - - [12/Dec/2024 03:17:29] "[35m[1mGET /jobs HTTP/1.1[0m" 500 -
+2024-12-13 14:46:54,791 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:46:54,792 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:47:10,511 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:47:10] "[33mGET / HTTP/1.1[0m" 404 -
+2024-12-13 14:47:21,946 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:47:21,947 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:47:23,124 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:47:23] "GET / HTTP/1.1" 200 -
+2024-12-13 14:47:33,380 [ERROR]: Exception on /jobs [GET]
+Traceback (most recent call last):
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "C:\Python38\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "C:\Python38\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "C:\Python38\lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Python38\lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'jobs.location' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Python38\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Python38\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Python38\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Python38\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "D:\Flask\WSD-job-backend\app\routers.py", line 14, in get_jobs
+    jobs = Job.query.all()
+  File "C:\Python38\lib\site-packages\sqlalchemy\orm\query.py", line 2673, in all
+    return self._iter().all()  # type: ignore
+  File "C:\Python38\lib\site-packages\sqlalchemy\orm\query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "C:\Python38\lib\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+  File "C:\Python38\lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "C:\Python38\lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+  File "C:\Python38\lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Python38\lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "C:\Python38\lib\site-packages\pymysql\cursors.py", line 153, in execute
+    result = self._query(query)
+  File "C:\Python38\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 825, in _read_query_result
+    result.read()
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "C:\Python38\lib\site-packages\pymysql\connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "C:\Python38\lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "C:\Python38\lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1054, "Unknown column 'jobs.location' in 'field list'")
+[SQL: SELECT jobs.id AS jobs_id, jobs.title AS jobs_title, jobs.company_name AS jobs_company_name, jobs.location AS jobs_location, jobs.deadline AS jobs_deadline, jobs.description AS jobs_description 
+FROM jobs]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-12-13 14:47:33,404 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:47:33] "[35m[1mGET /jobs HTTP/1.1[0m" 500 -
+2024-12-13 14:52:15,136 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:52:15,137 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:52:16,123 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:52:16] "GET / HTTP/1.1" 200 -
+2024-12-13 14:53:12,668 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:53:12,669 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:53:13,797 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:53:13] "GET / HTTP/1.1" 200 -
+2024-12-13 14:53:19,196 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:53:19] "GET /jobs HTTP/1.1" 200 -
+2024-12-13 14:55:45,466 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:55:45,468 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:55:46,450 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:55:46] "GET / HTTP/1.1" 200 -
+2024-12-13 14:55:54,184 [ERROR]: Error in /jobs route: 1054 (42S22): Unknown column 'company' in 'field list'
+2024-12-13 14:55:54,220 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:55:54] "[35m[1mGET /jobs HTTP/1.1[0m" 500 -
+2024-12-13 14:56:20,787 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:56:20,789 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:56:21,912 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:56:21] "GET / HTTP/1.1" 200 -
+2024-12-13 14:56:26,239 [ERROR]: Error in /jobs route: 1054 (42S22): Unknown column 'company' in 'field list'
+2024-12-13 14:56:26,241 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:56:26] "[35m[1mGET /jobs HTTP/1.1[0m" 500 -
+2024-12-13 14:57:46,339 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 14:57:46,340 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 14:57:47,430 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:57:47] "GET / HTTP/1.1" 200 -
+2024-12-13 14:57:51,556 [ERROR]: Error in /jobs route: 1054 (42S22): Unknown column 'location' in 'field list'
+2024-12-13 14:57:51,559 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:57:51] "[35m[1mGET /jobs HTTP/1.1[0m" 500 -
