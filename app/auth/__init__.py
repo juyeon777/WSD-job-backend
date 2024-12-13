@@ -1,6 +1,7 @@
 from flask import Blueprint
 
-# auth_bp 블루프린트 정의
+# auth 블루프린트 생성
 auth_bp = Blueprint('auth', __name__)
 
-from . import routes  # routes.py 가져오기
+# 라우트 불러오기
+from app.auth import routes
