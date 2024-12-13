@@ -225,3 +225,11 @@ FROM jobs]
 2024-12-13 14:57:47,430 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:57:47] "GET / HTTP/1.1" 200 -
 2024-12-13 14:57:51,556 [ERROR]: Error in /jobs route: 1054 (42S22): Unknown column 'location' in 'field list'
 2024-12-13 14:57:51,559 [INFO]: 127.0.0.1 - - [13/Dec/2024 14:57:51] "[35m[1mGET /jobs HTTP/1.1[0m" 500 -
+2024-12-13 16:15:52,894 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.9.158:5000
+2024-12-13 16:15:52,896 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-13 16:15:56,274 [INFO]: 127.0.0.1 - - [13/Dec/2024 16:15:56] "GET / HTTP/1.1" 200 -
+2024-12-13 16:16:00,107 [INFO]: Retrieved 100 job listings
+2024-12-13 16:16:00,136 [INFO]: 127.0.0.1 - - [13/Dec/2024 16:16:00] "GET /jobs HTTP/1.1" 200 -
