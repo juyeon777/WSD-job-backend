@@ -37,6 +37,11 @@ def error_response(message="An error occurred", code="ERROR"):
     }
     return jsonify(response), 400
 
+@applications_bp.route('/')
+@jwt_required()
+def applications_root():
+    return success_response(data={"message": "Applications API root"})
+
 # 지원하기 (POST /applications)
 @applications_bp.route('/applications', methods=['POST'])
 @jwt_required()

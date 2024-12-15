@@ -37,6 +37,11 @@ def error_response(message="An error occurred", code="ERROR"):
     }
     return jsonify(response), 400
 
+@bookmarks_bp.route('/')
+@jwt_required()
+def bookmarks_root():
+    return success_response(data={"message": "Bookmarks API root"})
+
 # 북마크 추가/제거 (POST /bookmarks)
 @bookmarks_bp.route('/bookmarks', methods=['POST'])
 @jwt_required()

@@ -3,7 +3,7 @@ from app.models.models import get_db_connection
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import logging
 
-jobs_bp = Blueprint('jobs', __name__)
+jobs_bp = Blueprint('jobs_api', __name__)
 
 # 유효한 정렬 필드 목록
 VALID_SORT_FIELDS = {'createdAt', 'title', 'company_name', 'salary'}
@@ -25,7 +25,7 @@ def success_response(data=None, pagination=None):
     return jsonify(response), 200
 
 # 실패 응답 함수
-def error_response(message="An error occurred", code="ERROR"):
+def error_response(message="An error occurred", code="ERROR", status_code=400):
     """
     실패 응답을 생성하는 함수
     :param message: 에러 메시지
@@ -37,10 +37,10 @@ def error_response(message="An error occurred", code="ERROR"):
         "message": message,
         "code": code
     }
-    return jsonify(response), 400
+    return jsonify(response), status_code
 
 # 채용 공고 목록 조회 (GET /jobs)
-@jobs_bp.route('/jobs', methods=['GET'])
+@jobs_bp.route('/', methods=['GET'])
 def get_jobs():
     try:
         # 요청 파라미터
@@ -115,11 +115,11 @@ def get_jobs():
 
     except Exception as e:
         logging.error(f"Error fetching jobs: {str(e)}")
-        return error_response(message="Failed to fetch jobs", code="JOBS_FETCH_FAILED")
+        return error_response(message="Failed to fetch jobs", code="JOBS_FETCH_FAILED", status_code=404)
 
 
 # 채용 공고 상세 조회 (GET /jobs/<id>)
-@jobs_bp.route('/jobs/<int:job_id>', methods=['GET'])
+@jobs_bp.route('/<int:job_id>', methods=['GET'])
 def get_job_detail(job_id):
     try:
         conn = get_db_connection()
@@ -163,7 +163,7 @@ def get_job_detail(job_id):
         return error_response(message="Failed to fetch job details", code="JOB_DETAILS_FAILED")
 
 # 알림 API (GET /jobs/notifications)
-@jobs_bp.route('/jobs/notifications', methods=['GET'])
+@jobs_bp.route('/notifications', methods=['GET'])
 @jwt_required()
 def get_notifications():
     try:

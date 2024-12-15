@@ -47,6 +47,11 @@ def is_valid_email(email):
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(pattern, email)
 
+
+@auth_bp.route('/')
+def auth_root():
+    return jsonify({"message": "Auth API root"}), 200
+
 # 회원 가입 (POST /auth/register)
 @auth_bp.route('/register', methods=['POST'])
 def register():
