@@ -1,146 +1,224 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Job Management API",
-      "description": "Job management API for managing jobs, applications, bookmarks, and user authentication.",
-      "version": "1.0.0"
+  "swagger": "2.0",
+  "info": {
+    "title": "Job Management API",
+    "description": "Job management API for managing jobs, applications, bookmarks, and user authentication.",
+    "version": "1.0.0"
+  },
+  "host": "127.0.0.1:5000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter JWT token in the format: Bearer <token>"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "회원가입",
+        "description": "사용자 회원가입을 수행합니다.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {"type": "string"},
+                "email": {"type": "string"},
+                "password": {"type": "string"}
+              },
+              "required": ["username", "email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {"description": "User registered successfully"},
+          "400": {"description": "Invalid input or user already exists"}
+        }
+      }
     },
-    "host": "localhost:5000",
-    "basePath": "/api",
-    "schemes": ["http"],
-    "paths": {
-      "/auth/register": {
-        "post": {
-          "summary": "회원가입",
-          "description": "사용자 회원가입을 수행합니다.",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {"type": "string"},
-                  "email": {"type": "string"},
-                  "password": {"type": "string"}
-                },
-                "required": ["username", "email", "password"]
+    "/auth/login": {
+      "post": {
+        "summary": "로그인",
+        "description": "사용자 로그인을 수행하고 JWT 토큰을 반환합니다.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {"type": "string"},
+                "password": {"type": "string"}
+              },
+              "required": ["email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {"description": "Login successful, returns tokens"},
+          "401": {"description": "Invalid email or password"}
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "로그아웃",
+        "description": "사용자 로그아웃을 수행하고 토큰을 블랙리스트에 추가합니다.",
+        "responses": {
+          "200": {"description": "Logged out successfully"},
+          "500": {"description": "Internal server error"}
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "summary": "토큰 갱신",
+        "description": "Refresh 토큰을 검증하고 새로운 Access 토큰을 반환합니다.",
+        "responses": {
+          "200": {"description": "New access token issued"},
+          "401": {"description": "Invalid or expired refresh token"}
+        }
+      }
+    },
+    "/auth/profile": {
+      "put": {
+        "summary": "프로필 수정",
+        "description": "사용자 정보를 수정합니다.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {"type": "string"},
+                "email": {"type": "string"},
+                "password": {"type": "string"}
               }
             }
-          ],
-          "responses": {
-            "201": {"description": "User registered successfully"},
-            "400": {"description": "Invalid input or user already exists"}
           }
+        ],
+        "responses": {
+          "200": {"description": "Profile updated successfully"},
+          "400": {"description": "Invalid input"}
         }
       },
-      "/auth/login": {
-        "post": {
-          "summary": "로그인",
-          "description": "사용자 로그인을 수행하고 토큰을 반환합니다.",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {"type": "string"},
-                  "password": {"type": "string"}
-                },
-                "required": ["email", "password"]
-              }
+      "delete": {
+        "summary": "회원 탈퇴",
+        "description": "사용자 계정을 삭제합니다.",
+        "responses": {
+          "200": {"description": "User deleted successfully"},
+          "404": {"description": "User not found"}
+        }
+      }
+    },
+    "/auth/activity": {
+      "get": {
+        "summary": "활동 로그 조회",
+        "description": "사용자의 로그인 이력, 지원 내역, 북마크 내역을 반환합니다.",
+        "responses": {
+          "200": {"description": "Activity log fetched successfully"},
+          "500": {"description": "Internal server error"}
+        }
+      }
+    },
+    "/applications": {
+      "post": {
+        "summary": "지원하기",
+        "description": "사용자가 채용 공고에 지원합니다.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "job_id": {"type": "integer"},
+                "resume_url": {"type": "string"}
+              },
+              "required": ["job_id"]
             }
-          ],
-          "responses": {
-            "200": {"description": "Login successful, returns tokens"},
-            "401": {"description": "Invalid email or password"}
           }
+        ],
+        "responses": {
+          "201": {"description": "Application submitted successfully"},
+          "400": {"description": "Already applied or invalid input"}
         }
       },
-      "/auth/logout": {
-        "post": {
-          "summary": "로그아웃",
-          "description": "사용자 로그아웃을 수행하고 토큰을 블랙리스트에 추가합니다.",
-          "responses": {
-            "200": {"description": "Logged out successfully"},
-            "500": {"description": "Internal server error"}
-          }
+      "get": {
+        "summary": "지원 내역 조회",
+        "description": "사용자의 지원 내역을 조회합니다.",
+        "responses": {
+          "200": {"description": "Application list fetched successfully"}
         }
-      },
-      "/auth/refresh": {
-        "post": {
-          "summary": "토큰 갱신",
-          "description": "Refresh 토큰을 검증하고 새로운 Access 토큰을 반환합니다.",
-          "responses": {
-            "200": {"description": "New access token issued"},
-            "401": {"description": "Invalid or expired refresh token"}
-          }
-        }
-      },
-      "/auth/profile": {
-        "put": {
-          "summary": "프로필 수정",
-          "description": "사용자 정보를 수정합니다.",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {"type": "string"},
-                  "email": {"type": "string"},
-                  "password": {"type": "string"}
-                }
-              }
+      }
+    },
+    "/bookmarks": {
+      "post": {
+        "summary": "북마크 추가/제거",
+        "description": "북마크를 추가하거나 제거합니다.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "job_id": {"type": "integer"}
+              },
+              "required": ["job_id"]
             }
-          ],
-          "responses": {
-            "200": {"description": "Profile updated successfully"},
-            "400": {"description": "Invalid input"}
           }
-        },
-        "delete": {
-          "summary": "회원 탈퇴",
-          "description": "사용자 계정을 삭제합니다.",
-          "responses": {
-            "200": {"description": "User deleted successfully"},
-            "404": {"description": "User not found"}
-          }
+        ],
+        "responses": {
+          "200": {"description": "Bookmark toggled successfully"},
+          "400": {"description": "Invalid input"}
         }
       },
-      "/auth/activity": {
-        "get": {
-          "summary": "활동 로그 조회",
-          "description": "사용자의 로그인 이력 조회",
-          "responses": {
-            "200": {"description": "Activity log fetched successfully"},
-            "500": {"description": "Internal server error"}
-          }
+      "get": {
+        "summary": "북마크 목록 조회",
+        "description": "사용자의 북마크 목록을 조회합니다.",
+        "parameters": [
+          {"name": "page", "in": "query", "type": "integer", "default": 1},
+          {"name": "size", "in": "query", "type": "integer", "default": 10}
+        ],
+        "responses": {
+          "200": {"description": "Bookmark list fetched successfully"}
         }
-      },
-      "/jobs": {
-        "get": {
-          "summary": "공고 목록 조회",
-          "parameters": [
-            {"name": "page", "in": "query", "type": "integer", "default": 1},
-            {"name": "size", "in": "query", "type": "integer", "default": 20}
-          ],
-          "responses": {
-            "200": {"description": "Job list fetched successfully"}
-          }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "summary": "채용 공고 목록 조회",
+        "description": "채용 공고를 조회하고 필터링합니다.",
+        "parameters": [
+          {"name": "page", "in": "query", "type": "integer", "default": 1},
+          {"name": "size", "in": "query", "type": "integer", "default": 20}
+        ],
+        "responses": {
+          "200": {"description": "Job list fetched successfully"}
         }
-      },
-      "/jobs/notifications": {
-        "get": {
-          "summary": "알림 조회",
-          "description": "최근 추가된 공고 목록을 조회합니다.",
-          "responses": {
-            "200": {"description": "Recent job notifications returned"}
-          }
+      }
+    },
+    "/jobs/notifications": {
+      "get": {
+        "summary": "알림 조회",
+        "description": "최근 추가된 채용 공고를 반환합니다.",
+        "responses": {
+          "200": {"description": "Recent job notifications fetched successfully"}
         }
       }
     }
   }
-  
+}

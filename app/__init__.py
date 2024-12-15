@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS  # CORS 추가
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
@@ -18,15 +19,18 @@ jwt = JWTManager()
 load_dotenv()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__ , static_folder='static')
     app.config.from_object(Config)
 
     # JWT 설정
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your_jwt_secret_key')
-    jwt.init_app(app)
 
-    # SQLAlchemy와 Migrate 초기화
+    # 확장 초기화
     db.init_app(app)
+    bcrypt.init_app(app)
+    jwt.init_app(app)
+    CORS(app)
+
     migrate.init_app(app, db)
 
     # API Blueprint 등록

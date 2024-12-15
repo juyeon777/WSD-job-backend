@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger_ui import get_swaggerui_blueprint
 from app.config import Config
+from flask_cors import CORS
 
 # 확장 초기화
 db = SQLAlchemy()
@@ -15,7 +16,7 @@ def create_app():
     
     # 설정 불러오기
     app.config.from_object(Config)
-
+    CORS(app)
     # 확장 초기화
     db.init_app(app)
     bcrypt.init_app(app)
@@ -27,16 +28,21 @@ def create_app():
     swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL)
     app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
-    # 블루프린트 등록
     from app.api.auth import auth_bp
     from app.api.jobs import jobs_bp
     from app.api.applications import applications_bp
     from app.api.bookmarks import bookmarks_bp
 
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    app.register_blueprint(jobs_bp, url_prefix='/jobs')
-    app.register_blueprint(applications_bp, url_prefix='/applications')
-    app.register_blueprint(bookmarks_bp, url_prefix='/bookmarks')
+    # 블루프린트에 CORS 적용
+    CORS(auth_bp)
+    CORS(jobs_bp)
+    CORS(applications_bp)
+    CORS(bookmarks_bp)
+
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(jobs_bp, url_prefix='/api/jobs')
+    app.register_blueprint(applications_bp, url_prefix='/api/applications')
+    app.register_blueprint(bookmarks_bp, url_prefix='/api/bookmarks')
 
     # 기본 라우트
     @app.route('/')
@@ -49,10 +55,10 @@ def create_app():
         <p>Explore the available API routes below:</p>
         <ul>
             <li><strong>Swagger Documentation:</strong> <a href="/swagger" target="_blank">/swagger</a></li>
-            <li><strong>Auth API:</strong> <a href="/auth" target="_blank">/auth</a></li>
-            <li><strong>Jobs API:</strong> <a href="/jobs" target="_blank">/jobs</a></li>
-            <li><strong>Applications API:</strong> <a href="/applications" target="_blank">/applications</a></li>
-            <li><strong>Bookmarks API:</strong> <a href="/bookmarks" target="_blank">/bookmarks</a></li>
+            <li><strong>Auth API:</strong> <a href="/api/auth" target="_blank">/auth</a></li>
+            <li><strong>Jobs API:</strong> <a href="/api/jobs" target="_blank">/jobs</a></li>
+            <li><strong>Applications API:</strong> <a href="/api/applications" target="_blank">/applications</a></li>
+            <li><strong>Bookmarks API:</strong> <a href="/api/bookmarks" target="_blank">/bookmarks</a></li>
         </ul>
         <p>Use the Swagger UI for testing and exploring the API endpoints.</p>
         """
