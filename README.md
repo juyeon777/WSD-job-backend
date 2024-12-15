@@ -18,6 +18,7 @@ Flask 백엔드를 기반으로 하고 Swagger를 통해 API 문서를 제공합
 
 ## 📁 프로젝트 구조
 
+```plaintext
 WSD-job-backend/
 │
 ├── app/                    
