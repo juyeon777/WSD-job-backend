@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from app.auth.routes import auth_bp  # /auth 블루프린트 가져오기
 from app import db, bcrypt  # SQLAlchemy 및 Bcrypt 가져오기
 from flask_jwt_extended import JWTManager
@@ -60,10 +60,10 @@ def create_app():
             return render_template('jobs.html', jobs=jobs_data)
         except mysql.connector.Error as e:
             app.logger.error(f"Database error: {e}")
-            return f"A database error occurred: {e}", 500
+            return jsonify({"error": "Database error", "details": str(e)}), 500
         except Exception as e:
             app.logger.error(f"Unexpected error in /jobs route: {e}")
-            return f"An unexpected error occurred: {e}", 500
+            return jsonify({"error": "Unexpected error", "details": str(e)}), 500
 
     @app.route('/')
     def index():
