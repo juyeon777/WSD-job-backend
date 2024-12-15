@@ -1,0 +1,88 @@
+2024-12-15 19:34:04,289 [INFO]: Starting the Flask application...
+2024-12-15 19:34:04,329 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.1.76:5000
+2024-12-15 19:34:04,331 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-15 19:34:04,333 [INFO]:  * Restarting with stat
+2024-12-15 19:34:05,836 [INFO]: Starting the Flask application...
+2024-12-15 19:34:05,861 [WARNING]:  * Debugger is active!
+2024-12-15 19:34:05,869 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:34:08,362 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:34:08] "GET / HTTP/1.1" 200 -
+2024-12-15 19:34:52,793 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:34:52] "[33mGET /jobs HTTP/1.1[0m" 404 -
+2024-12-15 19:37:01,916 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:37:01] "GET / HTTP/1.1" 200 -
+2024-12-15 19:37:46,990 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\main.py', reloading
+2024-12-15 19:37:47,102 [INFO]:  * Restarting with stat
+2024-12-15 19:37:49,028 [INFO]: Starting the Flask application...
+2024-12-15 19:37:49,052 [WARNING]:  * Debugger is active!
+2024-12-15 19:37:49,065 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:37:49,510 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:37:49] "GET / HTTP/1.1" 200 -
+2024-12-15 19:37:51,822 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:37:51] "[33mGET /jobs HTTP/1.1[0m" 404 -
+2024-12-15 19:37:55,449 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:37:55] "[33mGET /bookmarks HTTP/1.1[0m" 404 -
+2024-12-15 19:40:27,294 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\api\\__init__.py', reloading
+2024-12-15 19:40:27,455 [INFO]:  * Restarting with stat
+2024-12-15 19:40:29,388 [INFO]: Starting the Flask application...
+2024-12-15 19:40:29,416 [WARNING]:  * Debugger is active!
+2024-12-15 19:40:29,423 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:40:34,543 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\__init__.py', reloading
+2024-12-15 19:40:34,651 [INFO]:  * Restarting with stat
+2024-12-15 19:40:36,330 [INFO]: Starting the Flask application...
+2024-12-15 19:40:36,361 [WARNING]:  * Debugger is active!
+2024-12-15 19:40:36,370 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:40:37,422 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\__init__.py', reloading
+2024-12-15 19:40:37,535 [INFO]:  * Restarting with stat
+2024-12-15 19:40:39,422 [INFO]: Starting the Flask application...
+2024-12-15 19:40:39,441 [WARNING]:  * Debugger is active!
+2024-12-15 19:40:39,452 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:40:40,494 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\__init__.py', reloading
+2024-12-15 19:40:40,630 [INFO]:  * Restarting with stat
+2024-12-15 19:40:54,303 [INFO]: Starting the Flask application...
+2024-12-15 19:40:54,402 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.1.76:5000
+2024-12-15 19:40:54,403 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-15 19:40:54,406 [INFO]:  * Restarting with stat
+2024-12-15 19:40:56,110 [INFO]: Starting the Flask application...
+2024-12-15 19:40:56,136 [WARNING]:  * Debugger is active!
+2024-12-15 19:40:56,144 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:40:56,178 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:40:56] "GET / HTTP/1.1" 200 -
+2024-12-15 19:40:57,713 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:40:57] "[33mGET /auth HTTP/1.1[0m" 404 -
+2024-12-15 19:41:40,687 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:41:40] "[33mGET /api/auth HTTP/1.1[0m" 404 -
+2024-12-15 19:42:36,755 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:42:36] "[33mGET /applications HTTP/1.1[0m" 404 -
+2024-12-15 19:43:42,624 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\api\\__init__.py', reloading
+2024-12-15 19:43:42,733 [INFO]:  * Restarting with stat
+2024-12-15 19:43:45,170 [INFO]: Starting the Flask application...
+2024-12-15 19:43:45,195 [WARNING]:  * Debugger is active!
+2024-12-15 19:43:45,202 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:44:02,500 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\api\\__init__.py', reloading
+2024-12-15 19:44:02,642 [INFO]:  * Restarting with stat
+2024-12-15 19:44:04,440 [INFO]: Starting the Flask application...
+2024-12-15 19:44:04,463 [WARNING]:  * Debugger is active!
+2024-12-15 19:44:04,471 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:48:02,049 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\api\\auth.py', reloading
+2024-12-15 19:48:02,149 [INFO]:  * Restarting with stat
+2024-12-15 19:48:03,976 [INFO]: Starting the Flask application...
+2024-12-15 19:48:04,001 [WARNING]:  * Debugger is active!
+2024-12-15 19:48:04,013 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:48:08,767 [INFO]: Starting the Flask application...
+2024-12-15 19:48:08,809 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.1.76:5000
+2024-12-15 19:48:08,810 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-15 19:48:08,812 [INFO]:  * Restarting with stat
+2024-12-15 19:48:10,636 [INFO]: Starting the Flask application...
+2024-12-15 19:48:10,666 [WARNING]:  * Debugger is active!
+2024-12-15 19:48:10,677 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-15 19:48:10,713 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:10] "GET / HTTP/1.1" 200 -
+2024-12-15 19:48:14,035 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:14] "[32mGET /swagger HTTP/1.1[0m" 308 -
+2024-12-15 19:48:14,110 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:14] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-15 19:48:14,149 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:14] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-15 19:48:14,175 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:14] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-15 19:48:15,641 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:15] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-15 19:48:17,591 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:17] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-15 19:48:17,780 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:48:17] "[33mGET /static/swagger.json HTTP/1.1[0m" 404 -
+2024-12-15 19:49:10,836 [INFO]: 127.0.0.1 - - [15/Dec/2024 19:49:10] "[33mGET /api/auth/register HTTP/1.1[0m" 404 -
+2024-12-15 19:50:51,117 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\main.py', reloading
+2024-12-15 19:50:51,240 [INFO]:  * Restarting with stat

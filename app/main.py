@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
@@ -11,7 +11,7 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     
     # 설정 불러오기
     app.config.from_object(Config)
@@ -41,6 +41,28 @@ def create_app():
     # 기본 라우트
     @app.route('/')
     def index():
-        return "<h1>Welcome to the Job Listings Application</h1><p>Explore the API routes.</p>"
+        """
+        홈 라우트 - API 설명
+        """
+        return """
+        <h1>Welcome to the Job Listings Application</h1>
+        <p>Explore the available API routes below:</p>
+        <ul>
+            <li><strong>Swagger Documentation:</strong> <a href="/swagger" target="_blank">/swagger</a></li>
+            <li><strong>Auth API:</strong> <a href="/auth" target="_blank">/auth</a></li>
+            <li><strong>Jobs API:</strong> <a href="/jobs" target="_blank">/jobs</a></li>
+            <li><strong>Applications API:</strong> <a href="/applications" target="_blank">/applications</a></li>
+            <li><strong>Bookmarks API:</strong> <a href="/bookmarks" target="_blank">/bookmarks</a></li>
+        </ul>
+        <p>Use the Swagger UI for testing and exploring the API endpoints.</p>
+        """
+
+    # 블루프린트 테스트 라우트 (옵션)
+    @app.route('/ping')
+    def ping():
+        """
+        간단한 서버 상태 확인
+        """
+        return jsonify({"message": "Server is running", "status": "success"}), 200
 
     return app

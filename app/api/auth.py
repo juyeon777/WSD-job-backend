@@ -110,7 +110,6 @@ def login():
         "refresh_token": refresh_token
     })
 
-
 # 로그아웃 (POST /auth/logout)
 @auth_bp.route('/logout', methods=['POST'])
 @jwt_required()
@@ -136,7 +135,7 @@ def logout():
     except Exception as e:
         logging.error(f"Error logging out: {str(e)}")
         return error_response(message="Failed to log out", code="LOGOUT_FAILED")
-    
+
 # 토큰 갱신 (POST /auth/refresh)
 @auth_bp.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)

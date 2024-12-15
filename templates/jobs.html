@@ -1,59 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Listings</title>
     <style>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #444;
+        }
+
+        /* 테이블 스타일 */
         table {
+            width: 95%;
+            margin: 20px auto;
             border-collapse: collapse;
-            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
-            border: 1px solid black;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover td {
+            background-color: #e8f5e9;
+            cursor: pointer;
+        }
+
+        /* 링크 스타일 */
+        a {
+            text-decoration: none;
+            color: #1e88e5;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 반응형 디자인 */
+        @media screen and (max-width: 768px) {
+            table, th, td {
+                font-size: 0.9em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
     <h1>Job Listings</h1>
     <table>
-        <tr>
-            <th>Title</th>
-            <th>Company</th>
-            <th>Job Group</th>
-            <th>Badge</th>
-            <th>Deadline</th>
-            <th>Location</th>
-            <th>Experience</th>
-            <th>Education</th>
-            <th>Employment Type</th>
-            <th>Salary</th>
-            <th>Tech Stack</th>
-            <th>Created At</th>
-            <th>Crawled At</th>
-            <th>URL</th>
-        </tr>
-        {% for job in jobs %}
+        <thead>
             <tr>
-                <td>{{ job.title }}</td>
-                <td>{{ job.company_name }}</td>
-                <td>{{ job.job_group }}</td>
-                <td>{{ job.badge }}</td>
-                <td>{{ job.deadline }}</td>
-                <td>{{ job.address_main }} ({{ job.address_total }})</td>
-                <td>{{ job.experience }}</td>
-                <td>{{ job.education }}</td>
-                <td>{{ job.employment_type }}</td>
-                <td>{{ job.salary }}</td>
-                <td>{{ job.tech_stack }}</td>
-                <td>{{ job.createdAt }}</td>
-                <td>{{ job.crawledAt }}</td>
-                <td><a href="{{ job.url }}" target="_blank">Link</a></td>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Job Group</th>
+                <th>Badge</th>
+                <th>Deadline</th>
+                <th>Location</th>
+                <th>Experience</th>
+                <th>Education</th>
+                <th>Type</th>
+                <th>Salary</th>
+                <th>Tech Stack</th>
+                <th>Created At</th>
+                <th>Crawled At</th>
+                <th>Link</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.company_name }}</td>
+                    <td>{{ job.job_group }}</td>
+                    <td>{{ job.badge }}</td>
+                    <td>{{ job.deadline }}</td>
+                    <td>{{ job.address_main }} ({{ job.address_total }})</td>
+                    <td>{{ job.experience }}</td>
+                    <td>{{ job.education }}</td>
+                    <td>{{ job.employment_type }}</td>
+                    <td>{{ job.salary }}</td>
+                    <td>{{ job.tech_stack }}</td>
+                    <td>{{ job.createdAt }}</td>
+                    <td>{{ job.crawledAt }}</td>
+                    <td><a href="{{ job.url }}" target="_blank">View</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 </html>

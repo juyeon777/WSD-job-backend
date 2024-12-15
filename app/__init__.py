@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from app.config import Config
-from app.api import api_bp  # API Blueprint 가져오기
+from app.api import api_bp  # 메인 API Blueprint 가져오기
 from dotenv import load_dotenv
 import os
 
@@ -12,6 +12,7 @@ import os
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
+jwt = JWTManager()
 
 # 환경 변수 로드
 load_dotenv()
@@ -22,7 +23,7 @@ def create_app():
 
     # JWT 설정
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your_jwt_secret_key')
-    jwt = JWTManager(app)
+    jwt.init_app(app)
 
     # SQLAlchemy와 Migrate 초기화
     db.init_app(app)
@@ -34,6 +35,6 @@ def create_app():
     # 홈 라우트 (테스트용)
     @app.route('/')
     def index():
-        return {"message": "Welcome to the Job Management API!"}, 200
+        return "<h1>Welcome to the Job Listings Application</h1><p>Explore the API routes.</p>"
 
     return app
