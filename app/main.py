@@ -1,10 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger_ui import get_swaggerui_blueprint
 from app.config import Config
 from flask_cors import CORS
+from app.models.models import get_db_connection
 
 # 확장 초기화
 db = SQLAlchemy()
@@ -12,12 +13,11 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 
 def create_app():
-    app = Flask(__name__, static_folder='static')
+    app = Flask(__name__, static_folder='static', template_folder='../templates')
     
     # 설정 불러오기
     app.config.from_object(Config)
     CORS(app)
-    # 확장 초기화
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
@@ -47,21 +47,37 @@ def create_app():
     # 기본 라우트
     @app.route('/')
     def index():
-        """
-        홈 라우트 - API 설명
-        """
-        return """
-        <h1>Welcome to the Job Listings Application</h1>
-        <p>Explore the available API routes below:</p>
-        <ul>
-            <li><strong>Swagger Documentation:</strong> <a href="/swagger" target="_blank">/swagger</a></li>
-            <li><strong>Auth API:</strong> <a href="/api/auth" target="_blank">/auth</a></li>
-            <li><strong>Jobs API:</strong> <a href="/api/jobs" target="_blank">/jobs</a></li>
-            <li><strong>Applications API:</strong> <a href="/api/applications" target="_blank">/applications</a></li>
-            <li><strong>Bookmarks API:</strong> <a href="/api/bookmarks" target="_blank">/bookmarks</a></li>
-        </ul>
-        <p>Use the Swagger UI for testing and exploring the API endpoints.</p>
-        """
+        return render_template('index.html')  # 메인 페이지 렌더링
+    # 채용 공고 페이지 라우트 추가
+    @app.route('/jobs/page')
+    def jobs_page():
+        try:
+            # 데이터베이스 연결
+            conn = get_db_connection()
+            cursor = conn.cursor(dictionary=True)  # 결과를 딕셔너리 형태로 반환
+
+            # SQL 쿼리 실행
+            query = """
+            SELECT title, company_name, job_group, badge, deadline, 
+                address_main, address_total, experience, education, 
+                employment_type, salary, tech_stack, createdAt, crawledAt, url
+            FROM jobs
+            ORDER BY createdAt DESC
+            """
+            cursor.execute(query)
+            jobs = cursor.fetchall()  # 모든 데이터 가져오기
+
+            # 연결 종료
+            cursor.close()
+            conn.close()
+
+            # jobs.html에 데이터 전달
+            return render_template('jobs.html', jobs=jobs)
+
+        except Exception as e:
+            print(f"Error fetching jobs: {e}")
+            return render_template('jobs.html', jobs=[])
+
 
     # 블루프린트 테스트 라우트 (옵션)
     @app.route('/ping')

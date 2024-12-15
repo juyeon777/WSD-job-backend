@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from app.models.models import get_db_connection
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import logging
+from flask import render_template  # HTML 템플릿 렌더링을 위해 추가
 
 jobs_bp = Blueprint('jobs_api', __name__)
 
