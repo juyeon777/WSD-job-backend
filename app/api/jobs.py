@@ -7,6 +7,37 @@ jobs_bp = Blueprint('jobs', __name__)
 # 유효한 정렬 필드 목록
 VALID_SORT_FIELDS = {'createdAt', 'title', 'company_name', 'salary'}
 
+# 성공 응답 함수
+def success_response(data=None, pagination=None):
+    """
+    성공 응답을 생성하는 함수
+    :param data: 실제 반환할 데이터 (dict, list 등)
+    :param pagination: 페이지네이션 정보 (dict)
+    :return: JSON 형식의 성공 응답
+    """
+    response = {
+        "status": "success",
+        "data": data if data else {}
+    }
+    if pagination:
+        response["pagination"] = pagination
+    return jsonify(response), 200
+
+# 실패 응답 함수
+def error_response(message="An error occurred", code="ERROR"):
+    """
+    실패 응답을 생성하는 함수
+    :param message: 에러 메시지
+    :param code: 에러 코드
+    :return: JSON 형식의 실패 응답
+    """
+    response = {
+        "status": "error",
+        "message": message,
+        "code": code
+    }
+    return jsonify(response), 400
+
 # 채용 공고 목록 조회 (GET /jobs)
 @jobs_bp.route('/jobs', methods=['GET'])
 def get_jobs():
@@ -73,18 +104,17 @@ def get_jobs():
         cursor.close()
         conn.close()
 
-        return jsonify({
-            "data": jobs,
-            "pagination": {
-                "currentPage": page,
-                "pageSize": size,
-                "totalItems": total_count
-            }
-        }), 200
+        pagination = {
+            "currentPage": page,
+            "pageSize": size,
+            "totalItems": total_count
+        }
+
+        return success_response(data=jobs, pagination=pagination)
 
     except Exception as e:
         logging.error(f"Error fetching jobs: {str(e)}")
-        return jsonify({"error": "Failed to fetch jobs"}), 500
+        return error_response(message="Failed to fetch jobs", code="JOBS_FETCH_FAILED")
 
 
 # 채용 공고 상세 조회 (GET /jobs/<id>)
@@ -98,7 +128,7 @@ def get_job_detail(job_id):
         cursor.execute("SELECT * FROM jobs WHERE id = %s", (job_id,))
         job = cursor.fetchone()
         if not job:
-            return jsonify({"error": "Job not found"}), 404
+            return error_response(message="Job not found", code="JOB_NOT_FOUND")
 
         # 조회수 컬럼이 존재하는지 확인 후 증가
         try:
@@ -122,11 +152,11 @@ def get_job_detail(job_id):
         cursor.close()
         conn.close()
 
-        return jsonify({
+        return success_response(data={
             "job": job,
             "related_jobs": related_jobs
-        }), 200
+        })
 
     except Exception as e:
         logging.error(f"Error fetching job details: {str(e)}")
-        return jsonify({"error": "Failed to fetch job details"}), 500
+        return error_response(message="Failed to fetch job details", code="JOB_DETAILS_FAILED")
