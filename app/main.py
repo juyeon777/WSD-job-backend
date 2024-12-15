@@ -25,7 +25,13 @@ def create_app():
     # Swagger UI 설정
     SWAGGER_URL = '/swagger'
     API_URL = '/static/swagger.json'
-    swaggerui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL)
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        SWAGGER_URL, 
+        API_URL,
+        config={  # Swagger UI 설정
+        'app_name': "YeonHire API 문서"
+        }
+    )
     app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
     from app.api.auth import auth_bp
