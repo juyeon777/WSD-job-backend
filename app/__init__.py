@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from app.config import Config
-from app.api import api_bp  # 메인 API Blueprint 가져오기
+from app.api import api_bp  # API Blueprint 가져오기
 from dotenv import load_dotenv
 import os
 

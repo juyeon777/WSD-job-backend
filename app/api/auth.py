@@ -2,11 +2,12 @@ from flask import Blueprint, request, current_app, jsonify
 from app.models.models import get_db_connection
 from flask_jwt_extended import (
     create_access_token, create_refresh_token,
-    jwt_required, get_jwt_identity
+    jwt_required, get_jwt, get_jwt_identity
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
 from datetime import datetime
+import logging
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -109,6 +110,33 @@ def login():
         "refresh_token": refresh_token
     })
 
+
+# 로그아웃 (POST /auth/logout)
+@auth_bp.route('/logout', methods=['POST'])
+@jwt_required()
+def logout():
+    try:
+        jti = get_jwt()["jti"]  # JWT의 고유 ID
+        user_id = get_jwt_identity()
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # 블랙리스트에 토큰 저장
+        cursor.execute("""
+            INSERT INTO token_blacklist (jti, user_id, revoked_at)
+            VALUES (%s, %s, %s)
+        """, (jti, user_id, datetime.now()))
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+        return success_response(data={"message": "Successfully logged out"})
+    except Exception as e:
+        logging.error(f"Error logging out: {str(e)}")
+        return error_response(message="Failed to log out", code="LOGOUT_FAILED")
+    
 # 토큰 갱신 (POST /auth/refresh)
 @auth_bp.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)
@@ -182,3 +210,42 @@ def delete_profile():
     conn.close()
 
     return success_response(data={"message": "User deleted successfully"})
+
+# 사용자 활동 로그 조회 (GET /auth/activity)
+@auth_bp.route('/activity', methods=['GET'])
+@jwt_required()
+def get_user_activity():
+    try:
+        user_id = get_jwt_identity()
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        # 로그인 이력 조회
+        cursor.execute("""
+            SELECT login_time FROM login_history WHERE user_id = %s ORDER BY login_time DESC
+        """, (user_id,))
+        login_history = cursor.fetchall()
+
+        # 지원 이력 조회
+        cursor.execute("""
+            SELECT job_id, applied_at, status FROM applications WHERE user_id = %s ORDER BY applied_at DESC
+        """, (user_id,))
+        applications = cursor.fetchall()
+
+        # 북마크 이력 조회
+        cursor.execute("""
+            SELECT job_id, bookmarked_at FROM bookmarks WHERE user_id = %s ORDER BY bookmarked_at DESC
+        """, (user_id,))
+        bookmarks = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        return success_response(data={
+            "login_history": login_history,
+            "applications": applications,
+            "bookmarks": bookmarks
+        })
+    except Exception as e:
+        logging.error(f"Error fetching activity log: {str(e)}")
+        return error_response(message="Failed to fetch activity log", code="ACTIVITY_LOG_FAILED")

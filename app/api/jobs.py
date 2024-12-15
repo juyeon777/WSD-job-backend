@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.models.models import get_db_connection
+from flask_jwt_extended import jwt_required, get_jwt_identity
 import logging
 
 jobs_bp = Blueprint('jobs', __name__)
@@ -160,3 +161,28 @@ def get_job_detail(job_id):
     except Exception as e:
         logging.error(f"Error fetching job details: {str(e)}")
         return error_response(message="Failed to fetch job details", code="JOB_DETAILS_FAILED")
+
+# 알림 API (GET /jobs/notifications)
+@jobs_bp.route('/jobs/notifications', methods=['GET'])
+@jwt_required()
+def get_notifications():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        # 최근 등록된 공고 조회 (마지막 5개 공고)
+        cursor.execute("""
+            SELECT id, title, company_name, createdAt
+            FROM jobs
+            ORDER BY createdAt DESC
+            LIMIT 5
+        """)
+        recent_jobs = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        return success_response(data={"recent_jobs": recent_jobs})
+    except Exception as e:
+        logging.error(f"Error fetching notifications: {str(e)}")
+        return error_response(message="Failed to fetch notifications", code="NOTIFICATIONS_FAILED")
