@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from app.api import api_bp
-from app.api.models.models import get_db_connection  # 데이터베이스 연결 확인용
+from app.models.models import get_db_connection  # 데이터베이스 연결 확인용
 import os
 from dotenv import load_dotenv
 
