@@ -1,52 +1,134 @@
-import mysql.connector
-from mysql.connector import Error, pooling
+from sqlalchemy import (
+    Column, Integer, String, ForeignKey, DateTime, Text, create_engine
+)
+from sqlalchemy.orm import relationship, declarative_base, sessionmaker
+from datetime import datetime
 import os
 from dotenv import load_dotenv
 
+# 환경 변수 로드
 load_dotenv()
 
-# 환경 변수 검증 함수
-def validate_env_vars():
-    required_vars = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME"]
-    missing_vars = [var for var in required_vars if not os.getenv(var)]
+# Base 클래스 초기화
+Base = declarative_base()
 
-    if missing_vars:
-        raise EnvironmentError(f"Missing required environment variables: {', '.join(missing_vars)}")
+# 사용자 테이블 (users)
+class User(Base):
+    __tablename__ = 'users'
 
-# 데이터베이스 연결 함수
-def get_db_connection():
-    try:
-        # 환경 변수 검증
-        validate_env_vars()
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String(50), unique=True, nullable=False)
+    email = Column(String(100), unique=True, nullable=False)
+    password = Column(String(255), nullable=False)  # 비밀번호는 해싱 후 저장
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-        # 데이터베이스 연결
-        connection = mysql.connector.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME"),
-        )
-        if connection.is_connected():
-            return connection
+    # 관계 설정
+    applications = relationship("Application", back_populates="user", cascade="all, delete-orphan")
+    bookmarks = relationship("Bookmark", back_populates="user", cascade="all, delete-orphan")
+    resumes = relationship("Resume", back_populates="user", cascade="all, delete-orphan")
 
-    except Error as e:
-        print(f"Error connecting to MySQL database: {e}")
-        raise
+# 채용 공고 테이블 (jobs)
+class Job(Base):
+    __tablename__ = 'jobs'
 
-# Connection Pool (옵션)
-connection_pool = pooling.MySQLConnectionPool(
-    pool_name="mypool",
-    pool_size=5,  # 최대 연결 수
-    host=os.getenv("DB_HOST"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME"),
-)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(200), nullable=False)
+    company_id = Column(Integer, ForeignKey('companies.id'))
+    description = Column(Text)
+    location = Column(String(100))
+    salary = Column(String(50))  # 급여 정보
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-# Connection Pool을 이용한 연결 함수
-def get_pooled_connection():
-    try:
-        return connection_pool.get_connection()
-    except Error as e:
-        print(f"Error getting connection from pool: {e}")
-        raise
+    # 관계 설정
+    applications = relationship("Application", back_populates="job", cascade="all, delete-orphan")
+    bookmarks = relationship("Bookmark", back_populates="job", cascade="all, delete-orphan")
+    company = relationship("Company", back_populates="jobs")
+
+# 회사 정보 테이블 (companies)
+class Company(Base):
+    __tablename__ = 'companies'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False)
+    industry = Column(String(100))
+    location = Column(String(100))
+    description = Column(Text)
+
+    # 관계 설정
+    jobs = relationship("Job", back_populates="company", cascade="all, delete-orphan")
+
+# 지원 내역 테이블 (applications)
+class Application(Base):
+    __tablename__ = 'applications'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    job_id = Column(Integer, ForeignKey('jobs.id'), nullable=False)
+    applied_at = Column(DateTime, default=datetime.utcnow)
+    status = Column(String(50), default="지원")  # 상태: 지원, 취소 등
+
+    # 관계 설정
+    user = relationship("User", back_populates="applications")
+    job = relationship("Job", back_populates="applications")
+
+# 북마크 테이블 (bookmarks)
+class Bookmark(Base):
+    __tablename__ = 'bookmarks'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    job_id = Column(Integer, ForeignKey('jobs.id'), nullable=False)
+    bookmarked_at = Column(DateTime, default=datetime.utcnow)
+
+    # 관계 설정
+    user = relationship("User", back_populates="bookmarks")
+    job = relationship("Job", back_populates="bookmarks")
+
+# 이력서 테이블 (resumes)
+class Resume(Base):
+    __tablename__ = 'resumes'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # 관계 설정
+    user = relationship("User", back_populates="resumes")
+
+# 토큰 블랙리스트 테이블 (token_blacklist)
+class TokenBlacklist(Base):
+    __tablename__ = 'token_blacklist'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    token = Column(String(500), nullable=False, unique=True)
+    blacklisted_at = Column(DateTime, default=datetime.utcnow)
+
+# 로그인 히스토리 테이블 (login_history)
+class LoginHistory(Base):
+    __tablename__ = 'login_history'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    ip_address = Column(String(50))
+    logged_in_at = Column(DateTime, default=datetime.utcnow)
+
+    # 관계 설정
+    user = relationship("User")
+
+# 데이터베이스 연결 설정
+def get_engine():
+    return create_engine(
+        f"mysql+mysqlconnector://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
+        f"@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}",
+        echo=True
+    )
+
+# 테이블 생성 함수
+def create_tables():
+    engine = get_engine()
+    Base.metadata.create_all(engine)
+    print("테이블 생성 완료")
+
+# 세션 팩토리 설정
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=get_engine())
