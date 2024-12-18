@@ -44,6 +44,7 @@
   "paths": {
     "/auth/register": {
       "post": {
+        "tags": ["Auth"],
         "summary": "회원가입",
         "description": "사용자 회원가입을 수행합니다.",
         "parameters": [

@@ -22,3 +22,10 @@
 2024-12-18 16:18:15,143 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:18:15] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
 2024-12-18 16:18:15,272 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:18:15] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
 2024-12-18 16:18:15,281 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:18:15] "GET /static/swagger.json HTTP/1.1" 200 -
+2024-12-18 16:22:24,959 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:24] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 16:22:24,977 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:24] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 16:22:24,978 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:24] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 16:22:24,994 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:24] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 16:22:25,002 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:25] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 16:22:25,096 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:25] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 16:22:25,108 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:22:25] "GET /static/swagger.json HTTP/1.1" 200 -
