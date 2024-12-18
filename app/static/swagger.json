@@ -135,6 +135,7 @@
     },
     "/auth/refresh": {
       "post": {
+        "tags": ["Auth"],
         "summary": "토큰 갱신",
         "description": "Refresh 토큰을 검증하고 새로운 Access 토큰을 반환합니다.",
         "responses": {
