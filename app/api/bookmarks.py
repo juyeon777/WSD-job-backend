@@ -43,49 +43,41 @@ def bookmarks_root():
     return success_response(data={"message": "Bookmarks API root"})
 
 # 북마크 추가/제거 (POST /bookmarks)
-@bookmarks_bp.route('/bookmarks', methods=['POST'])
+@bookmarks_bp.route('', methods=['POST'])
 @jwt_required()
 def toggle_bookmark():
     try:
-        user_id = get_jwt_identity()  # 현재 인증된 사용자 ID
         data = request.get_json()
+        user_id = get_jwt_identity()
         job_id = data.get('job_id')
 
         if not job_id:
-            return error_response(message="Job ID is required", code="JOB_ID_REQUIRED")
+            return {"status": "error", "message": "Job ID is required"}, 400
 
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # 북마크 존재 여부 확인
-        cursor.execute("""
-            SELECT id FROM bookmarks WHERE user_id = %s AND job_id = %s
-        """, (user_id, job_id))
-        bookmark = cursor.fetchone()
+        # 북마크 확인
+        cursor.execute("SELECT id FROM bookmarks WHERE user_id = %s AND job_id = %s", (user_id, job_id))
+        existing = cursor.fetchone()
 
-        if bookmark:
+        if existing:
             # 북마크 제거
-            cursor.execute("""
-                DELETE FROM bookmarks WHERE user_id = %s AND job_id = %s
-            """, (user_id, job_id))
+            cursor.execute("DELETE FROM bookmarks WHERE id = %s", (existing['id'],))
             message = "Bookmark removed successfully"
         else:
             # 북마크 추가
-            cursor.execute("""
-                INSERT INTO bookmarks (user_id, job_id, bookmarked_at)
-                VALUES (%s, %s, %s)
-            """, (user_id, job_id, datetime.now()))
+            cursor.execute("INSERT INTO bookmarks (user_id, job_id) VALUES (%s, %s)", (user_id, job_id))
             message = "Bookmark added successfully"
 
         conn.commit()
         cursor.close()
         conn.close()
 
-        return success_response(data={"message": message})
+        return {"status": "success", "message": message}, 200
 
     except Exception as e:
-        logging.error(f"Error toggling bookmark: {str(e)}")
-        return error_response(message="Failed to toggle bookmark", code="BOOKMARK_TOGGLE_FAILED")
+        return {"status": "error", "message": str(e)}, 500
 
 
 # 북마크 목록 조회 (GET /bookmarks)
