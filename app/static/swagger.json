@@ -44,7 +44,9 @@
   "paths": {
     "/auth/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "회원가입",
         "description": "사용자 회원가입을 수행합니다.",
         "parameters": [
@@ -84,7 +86,9 @@
     },
     "/auth/login": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "로그인",
         "description": "사용자 로그인을 수행하고 JWT 토큰을 반환합니다.",
         "parameters": [
@@ -120,7 +124,9 @@
     },
     "/auth/logout": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "로그아웃",
         "description": "사용자 로그아웃을 수행하고 토큰을 블랙리스트에 추가합니다.",
         "responses": {
@@ -135,7 +141,9 @@
     },
     "/auth/refresh": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "토큰 갱신",
         "description": "Refresh 토큰을 검증하고 새로운 Access 토큰을 반환합니다.",
         "responses": {
@@ -150,7 +158,9 @@
     },
     "/auth/profile": {
       "put": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "프로필 수정",
         "description": "사용자 정보를 수정합니다.",
         "parameters": [
@@ -183,7 +193,9 @@
         }
       },
       "delete": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "회원 탈퇴",
         "description": "사용자 계정을 삭제합니다.",
         "responses": {
@@ -198,7 +210,9 @@
     },
     "/auth/activity": {
       "get": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "활동 로그 조회",
         "description": "사용자의 로그인 이력, 지원 내역, 북마크 내역을 반환합니다.",
         "responses": {
@@ -213,7 +227,9 @@
     },
     "/applications": {
       "post": {
-        "tags": ["Applications"],
+        "tags": [
+          "Applications"
+        ],
         "summary": "지원하기",
         "description": "사용자가 채용 공고에 지원합니다.",
         "parameters": [
@@ -243,7 +259,9 @@
         }
       },
       "get": {
-        "tags": ["Applications"],
+        "tags": [
+          "Applications"
+        ],
         "summary": "지원 내역 조회",
         "description": "사용자의 지원 내역을 조회합니다.",
         "responses": {
@@ -255,7 +273,9 @@
     },
     "/bookmarks": {
       "post": {
-        "tags": ["Bookmarks"],
+        "tags": [
+          "Bookmarks"
+        ],
         "summary": "북마크 추가/제거",
         "description": "북마크를 추가하거나 제거합니다.",
         "parameters": [
@@ -297,7 +317,9 @@
         }
       },
       "get": {
-        "tags": ["Bookmarks"],
+        "tags": [
+          "Bookmarks"
+        ],
         "summary": "북마크 목록 조회",
         "description": "사용자의 북마크 목록을 조회합니다.",
         "parameters": [
@@ -323,39 +345,191 @@
     },
     "/jobs": {
       "get": {
-        "tags": ["Jobs"],
+        "tags": [
+          "Jobs"
+        ],
         "summary": "채용 공고 목록 조회",
-        "description": "채용 공고를 조회하고 필터링합니다.",
+        "description": "페이지네이션, 필터링 및 검색 기능을 제공하여 채용 공고를 조회합니다.",
         "parameters": [
           {
             "name": "page",
             "in": "query",
+            "description": "페이지 번호 (기본값: 1)",
+            "required": false,
             "type": "integer",
             "default": 1
           },
           {
             "name": "size",
             "in": "query",
+            "description": "페이지 크기 (기본값: 20)",
+            "required": false,
             "type": "integer",
             "default": 20
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "정렬 기준 (예: created_at, salary)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "description": "지역별 필터링 (예: 서울, 부산)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "experience",
+            "in": "query",
+            "description": "경력별 필터링 (예: 신입, 경력)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salary",
+            "in": "query",
+            "description": "급여별 필터링 (예: 3000, 5000)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "tech_stack",
+            "in": "query",
+            "description": "기술 스택별 필터링 (예: Python, Java)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "키워드 검색 (포지션, 회사명 포함)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "company_name",
+            "in": "query",
+            "description": "회사명 검색",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "position",
+            "in": "query",
+            "description": "포지션 검색",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Job list fetched successfully"
+            "description": "공고 목록 조회 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "jobs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "company_name": {
+                        "type": "string"
+                      },
+                      "region": {
+                        "type": "string"
+                      },
+                      "experience": {
+                        "type": "string"
+                      },
+                      "salary": {
+                        "type": "integer"
+                      },
+                      "tech_stack": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "size": {
+                  "type": "integer"
+                },
+                "total_pages": {
+                  "type": "integer"
+                },
+                "total_jobs": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청 파라미터"
+          },
+          "500": {
+            "description": "서버 오류"
           }
         }
       }
     },
-    "/jobs/notifications": {
+    "/jobs/{id}": {
       "get": {
-        "tags": ["Jobs"],
-        "summary": "알림 조회",
-        "description": "최근 추가된 채용 공고를 반환합니다.",
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "채용 공고 상세 조회",
+        "description": "특정 채용 공고의 상세 정보를 조회합니다.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "조회할 채용 공고의 ID",
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Recent job notifications fetched successfully"
+            "description": "상세 조회 성공"
+          },
+          "404": {
+            "description": "공고를 찾을 수 없음"
+          },
+          "500": {
+            "description": "서버 오류 발생"
           }
+        }
+      }
+    },
+    "404": {
+      "description": "해당 공고를 찾을 수 없음",
+      "examples": {
+        "application/json": {
+          "status": "error",
+          "message": "Job not found"
+        }
+      }
+    },
+    "500": {
+      "description": "서버 오류",
+      "examples": {
+        "application/json": {
+          "status": "error",
+          "message": "Failed to fetch job details"
         }
       }
     }
