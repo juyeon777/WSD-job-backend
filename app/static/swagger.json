@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Job Management API",
+    "title": "YeonHire: Job Management API",
     "description": "채용 공고 API 문서",
     "version": "1.0.0"
   },
