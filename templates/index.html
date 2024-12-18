@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,6 +75,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- 네비게이션 바 -->
     <div class="navbar">
@@ -84,21 +86,22 @@
     <div class="content">
         <h1>YeonHire에 오신 것을 환영합니다!</h1>
         <p>최고의 채용 공고를 찾아보고, 원하는 직무에 지원하세요.</p>
-        <a href="/jobs/page">
-            <button>
-                채용 공고 보러가기
-            </button>
-        </a>
-        <a href="/swagger" target="_blank">
-            <button>
-                API 문서 보기
-            </button>
-        </a>
+
+        <div class="button-container">
+            <a href="/jobs/page">
+                <button class="btn-primary">채용 공고 보러가기</button>
+            </a>
+            <a href="/swagger" target="_blank">
+                <button class="btn-secondary">API 문서 보기</button>
+            </a>
+        </div>
     </div>
+
 
     <!-- 푸터 -->
     <footer>
         &copy; 2024 YeonHire. All Rights Reserved.
     </footer>
 </body>
+
 </html>
