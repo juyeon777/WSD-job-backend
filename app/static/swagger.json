@@ -120,6 +120,7 @@
     },
     "/auth/logout": {
       "post": {
+        "tags": ["Auth"],
         "summary": "로그아웃",
         "description": "사용자 로그아웃을 수행하고 토큰을 블랙리스트에 추가합니다.",
         "responses": {
