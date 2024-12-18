@@ -255,6 +255,7 @@
     },
     "/bookmarks": {
       "post": {
+        "tags": ["Bookmarks"],
         "summary": "북마크 추가/제거",
         "description": "북마크를 추가하거나 제거합니다.",
         "parameters": [
