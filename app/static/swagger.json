@@ -248,13 +248,68 @@
           "Auth"
         ],
         "summary": "토큰 갱신",
-        "description": "Refresh 토큰을 검증하고 새로운 Access 토큰을 반환합니다.",
+        "description": "Refresh 토큰을 검증하고 새로운 Access 토큰을 발급합니다. 만료된 토큰의 경우 오류를 반환합니다.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "Bearer Refresh 토큰을 입력하세요. 예시: Bearer <refresh_token>",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "New access token issued"
+            "description": "새로운 Access 토큰이 발급됨",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "New access token issued successfully"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Invalid or expired refresh token"
+            "description": "유효하지 않거나 만료된 Refresh 토큰",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid or expired refresh token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 내부 오류",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "An unexpected error occurred"
+                }
+              }
+            }
           }
         }
       }
@@ -265,33 +320,107 @@
           "Auth"
         ],
         "summary": "프로필 수정",
-        "description": "사용자 정보를 수정합니다.",
+        "description": "인증된 사용자의 프로필 정보를 수정합니다. 비밀번호를 입력하면 암호화하여 저장합니다.",
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "Bearer Access 토큰을 입력하세요. 예시: Bearer <access_token>",
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "body",
+            "required": true,
+            "description": "수정할 사용자 정보 (이름, 이메일, 비밀번호)",
             "schema": {
               "type": "object",
               "properties": {
                 "username": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "new_username"
                 },
                 "email": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "new_email@example.com"
                 },
                 "password": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "new_password123"
                 }
-              }
+              },
+              "required": [
+                "username",
+                "email"
+              ]
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Profile updated successfully"
+            "description": "프로필이 성공적으로 수정됨",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Profile updated successfully"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Invalid input"
+            "description": "입력값이 잘못되었거나 비어있음",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid input data"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증되지 않은 사용자",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized - Invalid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 내부 오류",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "An unexpected error occurred"
+                }
+              }
+            }
           }
         }
       },
@@ -334,16 +463,26 @@
           "Applications"
         ],
         "summary": "지원하기",
-        "description": "사용자가 채용 공고에 지원합니다.",
+        "description": "인증된 사용자가 특정 채용 공고에 지원합니다. 중복 지원을 방지하고 지원 정보를 저장합니다.",
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "Bearer Access 토큰을 입력하세요. 예시: Bearer <access_token>",
+            "type": "string"
+          },
           {
             "in": "body",
             "name": "body",
+            "required": true,
+            "description": "지원할 공고의 ID",
             "schema": {
               "type": "object",
               "properties": {
                 "job_id": {
-                  "type": "integer"
+                  "type": "integer",
+                  "example": 1
                 }
               },
               "required": [
@@ -354,10 +493,68 @@
         ],
         "responses": {
           "201": {
-            "description": "Application submitted successfully"
+            "description": "지원 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Application submitted successfully"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Already applied or invalid input"
+            "description": "이미 지원했거나 잘못된 입력값",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "You have already applied for this job"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증되지 않은 사용자",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized - Invalid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 내부 오류",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Failed to process application"
+                }
+              }
+            }
           }
         }
       },
