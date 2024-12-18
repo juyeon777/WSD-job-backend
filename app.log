@@ -430,3 +430,22 @@
 2024-12-18 18:29:33,287 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:29:33] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
 2024-12-18 18:29:42,513 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:29:42] "POST /api/auth/login HTTP/1.1" 200 -
 2024-12-18 18:30:18,378 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:30:18] "[33mDELETE /api/application/6 HTTP/1.1[0m" 404 -
+2024-12-18 18:31:24,381 [INFO]: Starting the Flask application...
+2024-12-18 18:31:24,441 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.1.81:5000
+2024-12-18 18:31:24,443 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-18 18:31:24,446 [INFO]:  * Restarting with stat
+2024-12-18 18:31:26,089 [INFO]: Starting the Flask application...
+2024-12-18 18:31:26,120 [WARNING]:  * Debugger is active!
+2024-12-18 18:31:26,134 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-18 18:31:32,402 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 18:31:32,421 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 18:31:32,426 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 18:31:32,430 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 18:31:32,434 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 18:31:32,601 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "GET /static/swagger.json HTTP/1.1" 200 -
+2024-12-18 18:31:32,731 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:32] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 18:31:47,360 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:31:47] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 18:32:14,175 [INFO]: 127.0.0.1 - - [18/Dec/2024 18:32:14] "DELETE /api/applications/5 HTTP/1.1" 200 -
