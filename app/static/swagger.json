@@ -198,6 +198,7 @@
     },
     "/auth/activity": {
       "get": {
+        "tags": ["Auth"],
         "summary": "활동 로그 조회",
         "description": "사용자의 로그인 이력, 지원 내역, 북마크 내역을 반환합니다.",
         "responses": {
