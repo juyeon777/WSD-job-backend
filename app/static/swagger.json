@@ -1108,6 +1108,100 @@
         }
       }
     },
+    "/jobs/notifications": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "최근 등록된 공고 알림",
+        "description": "최근에 등록된 채용 공고를 조회합니다. (최대 5개)",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Bearer Access 토큰을 입력하세요. 예시: Bearer <access_token>",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "최근 등록된 공고 조회 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "recent_jobs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "title": {
+                            "type": "string",
+                            "example": "백엔드 개발자"
+                          },
+                          "company_name": {
+                            "type": "string",
+                            "example": "YeonHire Corp"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-12-18T12:00:00Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "인증되지 않은 사용자",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized - Invalid token"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 내부 오류",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Failed to fetch notifications"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/applications/{id}": {
       "delete": {
         "tags": [
