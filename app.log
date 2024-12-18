@@ -34,3 +34,14 @@
 2024-12-18 16:04:26,786 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:04:26] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
 2024-12-18 16:04:27,109 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:04:27] "[36mGET /static/swagger.json HTTP/1.1[0m" 304 -
 2024-12-18 16:07:51,007 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:07:51] "GET / HTTP/1.1" 200 -
+2024-12-18 16:09:40,134 [INFO]: Starting the Flask application...
+2024-12-18 16:09:40,234 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.11.147:5000
+2024-12-18 16:09:40,235 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-18 16:09:40,237 [INFO]:  * Restarting with stat
+2024-12-18 16:09:42,790 [INFO]: Starting the Flask application...
+2024-12-18 16:09:42,848 [WARNING]:  * Debugger is active!
+2024-12-18 16:09:42,864 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-18 16:09:42,950 [INFO]: 127.0.0.1 - - [18/Dec/2024 16:09:42] "GET / HTTP/1.1" 200 -

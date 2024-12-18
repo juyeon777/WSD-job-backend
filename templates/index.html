@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,7 @@
         /* 네비게이션 바 */
         .navbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             background-color: #2E7D32;
             padding: 10px 20px;
@@ -29,53 +28,62 @@
             font-weight: bold;
         }
 
-        /* 메인 콘텐츠 영역 */
+        /* 메인 콘텐츠 */
         .content {
-            margin: 20px auto;
-            max-width: 800px;
             text-align: center;
+            margin-top: 50px;
         }
 
         .content h1 {
-            margin: 20px 0;
             color: #333;
+            margin-bottom: 10px;
         }
 
         .content p {
             color: #777;
             font-size: 1.1rem;
-            margin-bottom: 20px;
         }
 
-        .content a button {
-            margin: 10px;
+        /* 버튼 컨테이너 */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* 버튼 스타일 */
+        .btn-primary, .btn-secondary {
+            background-color: #4CAF50;
+            color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
-            color: white;
+            width: 200px;
+            text-align: center;
         }
 
-        .content a button:first-child {
-            background-color: #4CAF50;
-        }
-
-        .content a button:last-child {
+        .btn-secondary {
             background-color: #FF9800;
         }
 
-        /* 하단 푸터 */
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+
+        /* 푸터 */
         footer {
             background-color: #2E7D32;
             color: white;
             text-align: center;
             padding: 10px 0;
-            margin-top: 20px;
+            margin-top: 30px;
         }
     </style>
 </head>
-
 <body>
     <!-- 네비게이션 바 -->
     <div class="navbar">
@@ -86,7 +94,7 @@
     <div class="content">
         <h1>YeonHire에 오신 것을 환영합니다!</h1>
         <p>최고의 채용 공고를 찾아보고, 원하는 직무에 지원하세요.</p>
-
+        
         <div class="button-container">
             <a href="/jobs/page">
                 <button class="btn-primary">채용 공고 보러가기</button>
@@ -97,11 +105,9 @@
         </div>
     </div>
 
-
     <!-- 푸터 -->
     <footer>
         &copy; 2024 YeonHire. All Rights Reserved.
     </footer>
 </body>
-
 </html>
