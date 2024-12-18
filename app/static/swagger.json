@@ -349,6 +349,7 @@
     },
     "/jobs/notifications": {
       "get": {
+        "tags": ["Jobs"],
         "summary": "알림 조회",
         "description": "최근 추가된 채용 공고를 반환합니다.",
         "responses": {
