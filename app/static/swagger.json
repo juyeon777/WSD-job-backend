@@ -48,22 +48,28 @@
           "Auth"
         ],
         "summary": "회원가입",
-        "description": "사용자 회원가입을 수행합니다.",
+        "description": "이메일 형식 검증, 비밀번호 암호화(Base64), 중복 회원 검사 후 사용자 정보를 저장합니다.",
         "parameters": [
           {
             "in": "body",
             "name": "body",
+            "required": true,
+            "description": "회원가입에 필요한 사용자 정보",
             "schema": {
               "type": "object",
               "properties": {
                 "username": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "admin2"
                 },
                 "email": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "email",
+                  "example": "admin2@admin.com"
                 },
                 "password": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "password123"
                 }
               },
               "required": [
@@ -76,10 +82,52 @@
         ],
         "responses": {
           "201": {
-            "description": "User registered successfully"
+            "description": "회원가입 성공",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User registered successfully"
+                }
+              }
+            }
           },
           "400": {
-            "description": "Invalid input or user already exists"
+            "description": "잘못된 입력 또는 중복 회원 존재",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Email format invalid or user already exists"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "비밀번호 암호화 실패",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Password encryption failed"
+                }
+              }
+            }
           }
         }
       }
