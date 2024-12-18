@@ -7,7 +7,27 @@
   },
   "host": "127.0.0.1:5000",
   "basePath": "/api",
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "인증 및 사용자 관리"
+    },
+    {
+      "name": "Applications",
+      "description": "채용 공고 지원 관리"
+    },
+    {
+      "name": "Bookmarks",
+      "description": "북마크 관리"
+    },
+    {
+      "name": "Jobs",
+      "description": "채용 공고 관리"
+    }
+  ],
   "securityDefinitions": {
     "Bearer": {
       "type": "apiKey",
