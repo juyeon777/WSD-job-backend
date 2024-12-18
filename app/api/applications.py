@@ -120,7 +120,7 @@ def get_applications():
 
 
 # 지원 취소 (DELETE /applications/<int:application_id>)
-@applications_bp.route('/applications/<int:application_id>', methods=['DELETE'])
+@applications_bp.route('/<int:application_id>', methods=['DELETE'])
 @jwt_required()
 def cancel_application(application_id):
     try:
