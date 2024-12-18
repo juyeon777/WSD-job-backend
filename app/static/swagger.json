@@ -183,6 +183,7 @@
         }
       },
       "delete": {
+        "tags": ["Auth"],
         "summary": "회원 탈퇴",
         "description": "사용자 계정을 삭제합니다.",
         "responses": {
