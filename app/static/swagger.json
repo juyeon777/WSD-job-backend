@@ -150,6 +150,7 @@
     },
     "/auth/profile": {
       "put": {
+        "tags": ["Auth"],
         "summary": "프로필 수정",
         "description": "사용자 정보를 수정합니다.",
         "parameters": [
