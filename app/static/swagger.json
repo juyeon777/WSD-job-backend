@@ -84,6 +84,7 @@
     },
     "/auth/login": {
       "post": {
+        "tags": ["Auth"],
         "summary": "로그인",
         "description": "사용자 로그인을 수행하고 JWT 토큰을 반환합니다.",
         "parameters": [
