@@ -174,8 +174,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "job_id": {"type": "integer"},
-                "resume_url": {"type": "string"}
+                "job_id": {"type": "integer"}
               },
               "required": ["job_id"]
             }

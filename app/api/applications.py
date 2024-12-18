@@ -43,31 +43,31 @@ def applications_root():
     return success_response(data={"message": "Applications API root"})
 
 # 지원하기 (POST /applications)
-@applications_bp.route('/applications', methods=['POST'])
+@applications_bp.route('', methods=['POST'])
 @jwt_required()
 def create_application():
     try:
         data = request.get_json()
-        user_id = get_jwt_identity()  # 현재 인증된 사용자 ID
-        job_id = data.get('job_id')
-        resume_url = data.get('resume_url')  # 선택적으로 이력서 첨부
+        print("Request Data:", data)  # 입력 데이터 출력 (디버깅용)
+
+        user_id = get_jwt_identity()
+        job_id = data.get('job_id') if data else None  # 디버깅 추가
 
         if not job_id:
             return error_response(message="Job ID is required", code="JOB_ID_REQUIRED")
 
+        # DB 연결 및 중복 확인
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # 중복 지원 확인
         cursor.execute("SELECT id FROM applications WHERE user_id = %s AND job_id = %s", (user_id, job_id))
         if cursor.fetchone():
             return error_response(message="You have already applied for this job", code="DUPLICATE_APPLICATION")
 
-        # 지원 정보 저장
         cursor.execute("""
-            INSERT INTO applications (user_id, job_id, resume_url, status, applied_at)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (user_id, job_id, resume_url, 'applied', datetime.now()))
+            INSERT INTO applications (user_id, job_id, status, applied_at)
+            VALUES (%s, %s, %s, %s)
+        """, (user_id, job_id, 'applied', datetime.now()))
         conn.commit()
 
         cursor.close()
@@ -78,6 +78,7 @@ def create_application():
     except Exception as e:
         logging.error(f"Error creating application: {str(e)}")
         return error_response(message="Failed to submit application", code="APPLICATION_SUBMISSION_FAILED")
+
 
 
 # 지원 내역 조회 (GET /applications)

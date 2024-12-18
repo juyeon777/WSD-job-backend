@@ -17,7 +17,9 @@ def create_app():
     
     # 설정 불러오기
     app.config.from_object(Config)
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})  # 모든 라우트에 CORS 적용
+
+    # 확장 초기화
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
@@ -38,12 +40,6 @@ def create_app():
     from app.api.jobs import jobs_bp
     from app.api.applications import applications_bp
     from app.api.bookmarks import bookmarks_bp
-
-    # 블루프린트에 CORS 적용
-    CORS(auth_bp)
-    CORS(jobs_bp)
-    CORS(applications_bp)
-    CORS(bookmarks_bp)
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(jobs_bp, url_prefix='/api/jobs')

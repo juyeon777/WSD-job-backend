@@ -89,7 +89,7 @@ def toggle_bookmark():
 
 
 # 북마크 목록 조회 (GET /bookmarks)
-@bookmarks_bp.route('/bookmarks', methods=['GET'])
+@bookmarks_bp.route('', methods=['GET'])
 @jwt_required()
 def get_bookmarks():
     try:

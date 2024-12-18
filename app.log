@@ -1,0 +1,115 @@
+2024-12-18 14:41:38,933 [INFO]: Starting the Flask application...
+2024-12-18 14:41:38,994 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.11.147:5000
+2024-12-18 14:41:38,995 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-18 14:41:38,997 [INFO]:  * Restarting with stat
+2024-12-18 14:41:41,188 [INFO]: Starting the Flask application...
+2024-12-18 14:41:41,224 [WARNING]:  * Debugger is active!
+2024-12-18 14:41:41,254 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-18 14:41:41,338 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:41] "GET / HTTP/1.1" 200 -
+2024-12-18 14:41:46,141 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:46] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 14:41:46,180 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:46] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 14:41:46,180 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:46] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 14:41:46,195 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:46] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 14:41:46,203 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:46] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 14:41:46,452 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:41:46] "[36mGET /static/swagger.json HTTP/1.1[0m" 304 -
+2024-12-18 14:42:14,810 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:42:14] "POST /api/auth/register HTTP/1.1" 200 -
+2024-12-18 14:44:47,226 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:44:47] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 14:45:36,106 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:45:36] "[31m[1mPOST /api/auth/logout HTTP/1.1[0m" 401 -
+2024-12-18 14:47:38,491 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:38] "[31m[1mPOST /api/auth/logout HTTP/1.1[0m" 401 -
+2024-12-18 14:47:41,609 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:41] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 14:47:41,628 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:41] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 14:47:41,630 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:41] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 14:47:41,635 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:41] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 14:47:41,653 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:41] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 14:47:41,898 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:41] "[36mGET /static/swagger.json HTTP/1.1[0m" 304 -
+2024-12-18 14:47:42,026 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:47:42] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 14:48:10,683 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:48:10] "[31m[1mPOST /api/auth/logout HTTP/1.1[0m" 401 -
+2024-12-18 14:48:12,955 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:48:12] "[31m[1mPOST /api/auth/logout HTTP/1.1[0m" 401 -
+2024-12-18 14:50:33,545 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:50:33] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 14:51:05,896 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:51:05] "POST /api/auth/logout HTTP/1.1" 200 -
+2024-12-18 14:51:10,183 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:51:10] "POST /api/auth/logout HTTP/1.1" 200 -
+2024-12-18 14:51:26,808 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:51:26] "[31m[1mPOST /api/auth/refresh HTTP/1.1[0m" 422 -
+2024-12-18 14:52:15,398 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:52:15] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 14:52:35,283 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:52:35] "[31m[1mPOST /api/auth/refresh HTTP/1.1[0m" 422 -
+2024-12-18 14:53:45,916 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:53:45] "[31m[1mPOST /api/auth/refresh HTTP/1.1[0m" 422 -
+2024-12-18 14:54:29,325 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:54:29] "POST /api/auth/refresh HTTP/1.1" 200 -
+2024-12-18 14:55:11,080 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:55:11] "[31m[1mPUT /api/auth/profile HTTP/1.1[0m" 422 -
+2024-12-18 14:56:21,645 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:56:21] "PUT /api/auth/profile HTTP/1.1" 200 -
+2024-12-18 14:57:36,755 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:57:36] "GET / HTTP/1.1" 200 -
+2024-12-18 14:57:39,802 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:57:39] "GET /jobs/page HTTP/1.1" 200 -
+2024-12-18 14:57:55,815 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:57:55] "[33mPOST /api/applications HTTP/1.1[0m" 404 -
+2024-12-18 14:58:38,735 [INFO]: 127.0.0.1 - - [18/Dec/2024 14:58:38] "[33mPOST /api/applications HTTP/1.1[0m" 404 -
+2024-12-18 14:59:36,981 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\main.py', reloading
+2024-12-18 14:59:37,170 [INFO]:  * Restarting with stat
+2024-12-18 15:03:31,145 [INFO]: Starting the Flask application...
+2024-12-18 15:03:31,208 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.11.147:5000
+2024-12-18 15:03:31,209 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-18 15:03:31,211 [INFO]:  * Restarting with stat
+2024-12-18 15:03:33,150 [INFO]: Starting the Flask application...
+2024-12-18 15:03:33,224 [WARNING]:  * Debugger is active!
+2024-12-18 15:03:33,225 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-18 15:04:13,421 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:13] "GET / HTTP/1.1" 200 -
+2024-12-18 15:04:34,674 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:34] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 15:04:34,711 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:34] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 15:04:34,718 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:34] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 15:04:34,721 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:34] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 15:04:34,730 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:34] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 15:04:34,902 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:34] "[36mGET /static/swagger.json HTTP/1.1[0m" 304 -
+2024-12-18 15:04:35,039 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:35] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 15:04:57,800 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:04:57] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 15:06:02,722 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:02] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 15:06:02,743 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:02] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 15:06:02,744 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:02] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 15:06:02,746 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:02] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 15:06:02,747 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:02] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 15:06:02,930 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:02] "GET /static/swagger.json HTTP/1.1" 200 -
+2024-12-18 15:06:03,043 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:03] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 15:06:15,665 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:06:15] "[33mPOST /api/applications HTTP/1.1[0m" 404 -
+2024-12-18 15:10:14,922 [INFO]: Starting the Flask application...
+2024-12-18 15:10:15,008 [INFO]: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.11.147:5000
+2024-12-18 15:10:15,009 [INFO]: [33mPress CTRL+C to quit[0m
+2024-12-18 15:10:15,012 [INFO]:  * Restarting with stat
+2024-12-18 15:10:17,883 [INFO]: Starting the Flask application...
+2024-12-18 15:10:17,932 [WARNING]:  * Debugger is active!
+2024-12-18 15:10:17,950 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-18 15:10:21,077 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 15:10:21,099 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 15:10:21,102 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 15:10:21,109 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 15:10:21,120 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 15:10:21,219 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 15:10:21,248 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:21] "GET /static/swagger.json HTTP/1.1" 200 -
+2024-12-18 15:10:38,421 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:10:38] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 15:11:27,378 [ERROR]: Error creating application: Not enough parameters for the SQL statement
+2024-12-18 15:11:27,379 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:11:27] "[31m[1mPOST /api/applications HTTP/1.1[0m" 400 -
+2024-12-18 15:13:29,937 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\api\\applications.py', reloading
+2024-12-18 15:13:30,064 [INFO]:  * Restarting with stat
+2024-12-18 15:13:31,869 [INFO]: Starting the Flask application...
+2024-12-18 15:13:31,888 [WARNING]:  * Debugger is active!
+2024-12-18 15:13:31,904 [INFO]:  * Debugger PIN: 806-238-390
+2024-12-18 15:13:38,304 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "GET /swagger/ HTTP/1.1" 200 -
+2024-12-18 15:13:38,327 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "[36mGET /swagger/index.css HTTP/1.1[0m" 304 -
+2024-12-18 15:13:38,332 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "[36mGET /swagger/swagger-ui.css HTTP/1.1[0m" 304 -
+2024-12-18 15:13:38,337 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "[36mGET /swagger/swagger-ui-bundle.js HTTP/1.1[0m" 304 -
+2024-12-18 15:13:38,342 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "[36mGET /swagger/swagger-ui-standalone-preset.js HTTP/1.1[0m" 304 -
+2024-12-18 15:13:38,591 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "[36mGET /static/swagger.json HTTP/1.1[0m" 304 -
+2024-12-18 15:13:38,725 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:38] "[36mGET /swagger/favicon-32x32.png HTTP/1.1[0m" 304 -
+2024-12-18 15:13:58,375 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:13:58] "POST /api/auth/login HTTP/1.1" 200 -
+2024-12-18 15:14:25,029 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:14:25] "POST /api/applications HTTP/1.1" 200 -
+2024-12-18 15:15:00,766 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:15:00] "[32mGET /api/applications HTTP/1.1[0m" 308 -
+2024-12-18 15:15:00,775 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:15:00] "GET /api/applications/ HTTP/1.1" 200 -
+2024-12-18 15:15:37,685 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:15:37] "[32mGET /api/jobs?page=1&size=10 HTTP/1.1[0m" 308 -
+2024-12-18 15:15:37,736 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:15:37] "GET /api/jobs/?page=1&size=10 HTTP/1.1" 200 -
+2024-12-18 15:18:32,988 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:18:32] "GET /api/jobs/notifications HTTP/1.1" 200 -
+2024-12-18 15:19:04,517 [INFO]: 127.0.0.1 - - [18/Dec/2024 15:19:04] "[33mPOST /api/bookmarks HTTP/1.1[0m" 404 -
+2024-12-18 15:22:03,610 [INFO]:  * Detected change in 'D:\\Flask\\WSD-job-backend\\app\\api\\bookmarks.py', reloading
+2024-12-18 15:22:03,718 [INFO]:  * Restarting with stat
