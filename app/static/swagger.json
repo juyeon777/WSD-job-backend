@@ -1202,7 +1202,7 @@
         }
       }
     },
-    "/applications/{id}": {
+    "/applications/{application_id}": {
       "delete": {
         "tags": [
           "Applications"
