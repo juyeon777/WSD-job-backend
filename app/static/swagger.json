@@ -138,19 +138,24 @@
           "Auth"
         ],
         "summary": "로그인",
-        "description": "사용자 로그인을 수행하고 JWT 토큰을 반환합니다.",
+        "description": "사용자 인증을 수행하고, JWT Access 및 Refresh 토큰을 발급하며 로그인 이력을 저장합니다.",
         "parameters": [
           {
             "in": "body",
             "name": "body",
+            "required": true,
+            "description": "로그인에 필요한 사용자 정보",
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "email",
+                  "example": "admin2@admin.com"
                 },
                 "password": {
-                  "type": "string"
+                  "type": "string",
+                  "example": "password123"
                 }
               },
               "required": [
@@ -162,10 +167,60 @@
         ],
         "responses": {
           "200": {
-            "description": "Login successful, returns tokens"
+            "description": "로그인 성공, JWT Access 및 Refresh 토큰 반환",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                },
+                "refresh_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                },
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Login successful"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Invalid email or password"
+            "description": "로그인 실패, 이메일 또는 비밀번호가 잘못됨",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid email or password"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "서버 내부 오류",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "An unexpected error occurred"
+                }
+              }
+            }
           }
         }
       }
