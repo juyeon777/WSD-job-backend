@@ -213,6 +213,7 @@
     },
     "/applications": {
       "post": {
+        "tags": ["Applications"],
         "summary": "지원하기",
         "description": "사용자가 채용 공고에 지원합니다.",
         "parameters": [
