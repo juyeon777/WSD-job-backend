@@ -6,6 +6,8 @@ import mysql.connector
 import os
 from dotenv import load_dotenv
 import time
+import json
+import requests
 
 # 환경 변수 로드
 load_dotenv()
@@ -180,6 +182,10 @@ class SaraminCrawler:
 
             page += 1
             time.sleep(1)
+
+        # 크롤링 결과를 JSON 파일로 저장
+        with open('jobs.json', 'w', encoding='utf-8') as f:
+            json.dump(jobs, f, ensure_ascii=False, indent=4)    
 
         logging.info(f"Crawling completed. Total jobs crawled: {len(jobs)}")
         return jobs
